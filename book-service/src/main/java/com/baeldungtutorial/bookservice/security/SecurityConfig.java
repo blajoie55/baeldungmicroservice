@@ -41,7 +41,7 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH, "/books/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/books/*").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                //.anyRequest().authenticated()
                 .and()
                 .csrf()
                 .disable();

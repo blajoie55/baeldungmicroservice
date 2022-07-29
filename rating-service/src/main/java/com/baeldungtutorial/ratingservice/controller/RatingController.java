@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,16 @@ public class RatingController {
     private RatingService ratingService;
 
     @GetMapping
+    public List<Rating> getAllRatings()
+    {
+        Rating rating = new Rating();
+        rating.setId(1);
+        rating.setBookId(2L);
+        rating.setStars(5);
+        return Collections.singletonList(rating);
+    }
+
+    @GetMapping(params = "bookId")
     public List<Rating> findRatingsByBookId(@RequestParam(required = false, defaultValue = "0") Long bookId)
     {
         if (bookId.equals(0L)) {

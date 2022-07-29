@@ -33,7 +33,7 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
 
     private HttpSecurity configureCommon(HttpSecurity http) throws Exception
     {
-        http.httpBasic()
+        /*http.httpBasic()
                 .disable()
                 .authorizeRequests()
                 .regexMatchers("^/ratings\\?bookId.*$").authenticated()
@@ -44,7 +44,8 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
-                .disable();
+                .disable();*/
+        http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
         return http;
     }
 }

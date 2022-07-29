@@ -1,4 +1,4 @@
-package com.baeldungtutorial.gatewayserver.filter;
+/*package com.baeldungtutorial.gatewayserver.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -42,3 +42,4 @@ public class SessionSavingZuulPreFilter extends ZuulFilter {
         return null;
     }
 }
+*/
