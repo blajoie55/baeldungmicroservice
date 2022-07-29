@@ -28,11 +28,7 @@ public class RatingController {
     @GetMapping
     public List<Rating> getAllRatings()
     {
-        Rating rating = new Rating();
-        rating.setId(1);
-        rating.setBookId(2L);
-        rating.setStars(5);
-        return Collections.singletonList(rating);
+        return ratingService.findAllRatings();
     }
 
     @GetMapping(params = "bookId")

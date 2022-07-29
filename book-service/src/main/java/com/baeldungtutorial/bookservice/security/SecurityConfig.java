@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     @Autowired
     public void configureGlobal1(AuthenticationManagerBuilder auth) throws Exception
@@ -19,19 +19,8 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication();
     }
 
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
-        configureCommon(http);
-    }*/
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
-    {
-        return configureCommon(http).build();
-    }
-
-    private HttpSecurity configureCommon(HttpSecurity http) throws Exception
     {
         http.httpBasic()
                 .disable()
@@ -45,6 +34,6 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable();
-        return http;
+        return http.build();
     }
 }
