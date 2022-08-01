@@ -17,8 +17,8 @@ ext {
 }
 
 dependencies {
-	//implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+	//https://github.com/eugenp/tutorials/blob/master/spring-cloud-modules/spring-cloud-bootstrap/gateway/pom.xml#L32
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
