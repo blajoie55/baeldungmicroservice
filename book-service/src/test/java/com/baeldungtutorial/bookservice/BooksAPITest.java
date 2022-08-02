@@ -79,4 +79,12 @@ public class BooksAPITest {
         Assertions.assertNotNull(result.getId());
         Assertions.assertNotEquals(0L, result.getId());
     }
+
+    @Test
+    public void whenAccessProtectedResource_thenSuccess()
+    {
+        Response response = RestAssured.given().auth().basic("user", "password").get(ROOT_URI + "/books/1");
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        Assertions.assertNotNull(response.getBody());
+    }
 }
