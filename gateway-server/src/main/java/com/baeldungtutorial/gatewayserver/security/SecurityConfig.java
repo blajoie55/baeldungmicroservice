@@ -17,25 +17,30 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
+//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
+
 //    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
-//    {
-//        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER")
 //                .and()
 //                .withUser("admin").password("admin").roles("ADMIN");
 //    }
-//
+
 //    @Override
-//    protected void configure(HttpSecurity http) throws Exception
-//    {
-//        http.httpBasic().and().authorizeRequests()
-//                .antMatchers("/books").permitAll()
-//                .antMatchers("/ratings").permitAll()
-//                .antMatchers("eureka/**").hasRole("ADMIN")
-//                .anyRequest().authenticated().and()
-//                //.formLogin().and()
-//                .logout().permitAll().and()
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .formLogin()
+//                .defaultSuccessUrl("/home/index.html", true)
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/books/**", "/ratings/**", "/login*", "/").permitAll()
+//                .antMatchers("/eureka/**").hasRole("ADMIN")
+//                .anyRequest().authenticated()
+//                .and()
+//                .logout()
+//                .and()
 //                .csrf().disable();
 //    }
 
@@ -46,7 +51,8 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
                 .anyExchange().authenticated()
                 .and()
                 .httpBasic().and()
-                .formLogin();
+                .formLogin().and()
+                .csrf().disable();
         /*http
                 // ...
                 .authorizeExchange((authorize) -> authorize
@@ -58,6 +64,24 @@ public class SecurityConfig {//extends WebSecurityConfigurerAdapter {
                 );*/
         return http.build();
     }
+
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
+//    {
+//        http
+//                .formLogin()
+//                .defaultSuccessUrl("/home/index.html", true)
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/books/**", "/ratings/**", "/login*", "/").permitAll()
+//                .antMatchers("/eureka/**").hasRole("ADMIN")
+//                .anyRequest().authenticated()
+//                .and()
+//                .logout()
+//                .and()
+//                .csrf().disable();
+//        return http.build();
+//    }
 
     @Bean
     public MapReactiveUserDetailsService userDetailsService() {

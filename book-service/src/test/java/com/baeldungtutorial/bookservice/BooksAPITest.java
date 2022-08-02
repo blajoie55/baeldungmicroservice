@@ -1,9 +1,11 @@
-package com.baeldungtutorial.gatewayserver;
+package com.baeldungtutorial.bookservice;
 
+import com.baeldungtutorial.bookservice.model.Book;
 import io.restassured.RestAssured;
 import io.restassured.authentication.FormAuthConfig;
 import io.restassured.config.RedirectConfig;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,5 +48,35 @@ public class BooksAPITest {
 
         response = RestAssured.get(ROOT_URI + "/books/1");
         Assertions.assertEquals(HttpStatus.UNAUTHORIZED.value(), response.getStatusCode());
+    }
+
+    @Test
+    public void whenAddNewBook_thenSuccess()
+    {
+        Book book = new Book();
+        book.setAuthor("Baeldung");
+        book.setTitle("How to spring cloud");
+
+        /*
+        Response bookResponse = RestAssured.given()
+            .auth()
+            .form("admin", "admin", formConfig)
+            .and()
+            .contentType(ContentType.JSON)
+            .body(book)
+            .post(ROOT_URI + "/book-service/books");
+         */
+        Response response = RestAssured.given().auth().basic("admin", "admin")
+                .and()
+                .contentType(ContentType.JSON)
+                .body(book)
+                .post(ROOT_URI + "/books");
+        Book result = response.as(Book.class);
+
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        Assertions.assertEquals(book.getAuthor(), result.getAuthor());
+        Assertions.assertEquals(book.getTitle(), result.getTitle());
+        Assertions.assertNotNull(result.getId());
+        Assertions.assertNotEquals(0L, result.getId());
     }
 }
