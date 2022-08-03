@@ -23,6 +23,7 @@ public class BookService {
     }
 
     public Book createBook(Book book) {
+        book.setId(3L);
         return book;
     }
 
